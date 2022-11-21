@@ -1,7 +1,7 @@
 // Fetching season details
-// fetch('http://api.streamio.cx/player.php?action=getseasons&id=601')
-//     .then((response) => response.json())
-//     .then((data) => console.log(data));
+fetch('http://api.streamio.cx/player.php?action=getseasons&id=601')
+    .then((response) => response.json())
+    .then((data) => console.log(data));
 
 const seasonsDetail = {
     "serie_name": "Elite",
