@@ -149,6 +149,10 @@ body {
   align-items: center;
 }
 
+.volume-controls {
+  position: relative;
+}
+
 @media only screen and (max-width: 768px) {
   .video-container .controls .title {
     display: none;
@@ -237,4 +241,222 @@ body {
   transform: translateX(-25%);
   top: 23%;
   z-index: 1;
+}
+
+.season-container {
+  display: none;
+  position: absolute;
+  right: 0;
+  bottom: 10vh;
+  overflow-y: scroll;
+  width: 50vw;
+  height: 50vh;
+  background: #232323;
+
+}
+
+.season-detail {
+  color: white;
+  width: 100%;
+  /* padding: 1rem; */
+}
+
+.episode-detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.episode-cover {
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  width: 30rem;
+  height: 7rem;
+  margin-right: 2rem;
+}
+
+.episode-cover:before {
+  content: '';
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  right: 0px;
+  width: 100%;
+  height: 40%;
+  z-index: 1;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
+}
+
+.play-option {
+  outline: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.episode-desc-container {
+  background: black;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+}
+
+.episode-header {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.episode-header svg {
+  fill: white;
+  margin-right: 1rem;
+}
+
+#season-list {
+  width: 100%;
+}
+
+.season-select-container {
+  width: 100%;
+}
+
+.season-select {
+  font-size: 1.5rem;
+  border: none;
+  outline: none;
+  background: none;
+  color: white;
+  /* margin: .8rem 1rem .8rem 0; */
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  padding: 1rem;
+  transition: background .25s;
+  display: flex;
+  justify-content: space-between;
+}
+
+.season-select svg {
+  display: none;
+}
+
+.season-select:hover {
+  background: #ffffff1a;
+}
+
+.season-select:hover svg {
+  display: block;
+}
+
+.episode-desc-container {
+  display: none;
+}
+
+.episode-desc-active {
+  display: flex;
+}
+
+.episode-name-btn {
+  border: none;
+  outline: none;
+  background: none;
+  color: white;
+  padding: 1rem;
+  width: 100%;
+  text-align: left;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.episode-name-btn:hover {
+  background: #ffffff1a;
+}
+
+
+.slider {
+  position: absolute;
+  top: -90%;
+  left: -14%;
+  transform: rotate(-90deg);
+  opacity: 0;
+  transition: opacity .25s;
+}
+
+/*********** Baseline, reset styles ***********/
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* Removes default focus */
+input[type="range"]:focus {
+  outline: none;
+}
+
+/******** Chrome, Safari, Opera and Edge Chromium styles ********/
+/* slider track */
+input[type="range"]::-webkit-slider-runnable-track {
+  background-color: #ff0000;
+  border-radius: 0.5rem;
+  height: .7rem;
+}
+
+/* slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  /* Override default look */
+  appearance: none;
+  margin-top: -7px;
+  /* Centers thumb on the track */
+  background-color: #ff0000;
+  border-radius: 50%;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+  outline: 3px solid #ff0000;
+  outline-offset: 0.125rem;
+}
+
+/*********** Firefox styles ***********/
+/* slider track */
+input[type="range"]::-moz-range-track {
+  background-color: #ff0000;
+  border-radius: 0.5rem;
+  height: .7rem;
+}
+
+/* slider thumb */
+input[type="range"]::-moz-range-thumb {
+  background-color: #ff0000;
+  border: none;
+  /*Removes extra border that FF applies*/
+  border-radius: 50%;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+input[type="range"]:focus::-moz-range-thumb {
+  outline: 3px solid #ff0000;
+  outline-offset: 0.125rem;
 }

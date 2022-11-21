@@ -67,6 +67,7 @@ const playPause = () => {
   }
 };
 
+
 const toggleMute = () => {
   video.muted = !video.muted;
   if (video.muted) {
@@ -232,4 +233,19 @@ const onSpeedButtonClick = () => {
 const removePlaybackControls = () => {
   const playbackControls = document.querySelector('.playback-controls');
   playbackControls.style.display = 'none';
+}
+
+const onVolumeChange = (value) => {
+  video.volume = +value / 100;
+}
+
+const volumeInput = document.querySelector('.slider');
+
+const showVolumeControl = () => {
+  volumeInput.style.opacity = 1;
+}
+
+const removeVolumeControl = () => {
+  volumeInput.style.opacity = 0;
+
 }
