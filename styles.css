@@ -5,7 +5,13 @@ body {
   height: 100vh;
   overflow: hidden;
   background: black;
-  font-family: 'Rubik', sans-serif;
+  font-family: "Rubik", sans-serif;
+}
+
+button {
+  outline: none;
+  border: none;
+  background: none;
 }
 
 .video-container {
@@ -14,6 +20,28 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: 0;
+  transition: opacity 0.75s;
+}
+
+.back-button {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  /* background: white; */
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: opacity 0.5s linear;
+}
+
+.back-button:hover {
+  opacity: 0.5;
 }
 
 .video-container video {
@@ -51,7 +79,7 @@ body {
   width: 90vw;
   height: 1vw;
   max-height: 7px;
-  background: #5B5B5B;
+  background: #5b5b5b;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -59,7 +87,7 @@ body {
 
 .video-container .progress-controls .progress-bar .watched-bar,
 .video-container .progress-controls .progress-bar .playhead {
-  background: #E31221;
+  background: #e31221;
   display: inline-block;
   transition: all 0.2s;
 }
@@ -116,7 +144,6 @@ body {
   height: 100%;
 }
 
-
 .video-container .controls button.volume svg path,
 .video-container .controls button.help svg,
 .video-container .controls button.episodes svg,
@@ -139,7 +166,6 @@ body {
   stroke: none;
 }
 
-
 .video-container .controls .title {
   font-size: 2vw;
   width: 100%;
@@ -149,24 +175,22 @@ body {
   align-items: center;
 }
 
+.muted {
+  display: none;
+}
+
 .volume-controls {
   position: relative;
 }
 
-@media only screen and (max-width: 768px) {
-  .video-container .controls .title {
-    display: none;
-  }
-}
-
 .video-container .controls .title .series {
-  color: #FEFEFE;
+  color: #fefefe;
   font-weight: bold;
   font-size: 1em;
 }
 
 .video-container .controls .title .episode {
-  color: #A1A1A1;
+  color: #a1a1a1;
   font-size: 0.75em;
   padding-left: 1vw;
 }
@@ -252,7 +276,6 @@ body {
   width: 50vw;
   height: 50vh;
   background: #232323;
-
 }
 
 .season-detail {
@@ -282,7 +305,7 @@ body {
 }
 
 .episode-cover:before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0px;
   bottom: 0px;
@@ -333,22 +356,23 @@ body {
   width: 100%;
 }
 
-.season-select-container {
+.season-select-container,
+.subtitle-select-container {
   width: 100%;
 }
 
-.season-select {
+.season-select,
+.subtitle-select {
   font-size: 1.5rem;
   border: none;
   outline: none;
   background: none;
   color: white;
-  /* margin: .8rem 1rem .8rem 0; */
   cursor: pointer;
   width: 100%;
   text-align: left;
   padding: 1rem;
-  transition: background .25s;
+  transition: background 0.25s;
   display: flex;
   justify-content: space-between;
 }
@@ -357,7 +381,8 @@ body {
   display: none;
 }
 
-.season-select:hover {
+.season-select:hover,
+.subtitle-select:hover {
   background: #ffffff1a;
 }
 
@@ -389,14 +414,13 @@ body {
   background: #ffffff1a;
 }
 
-
 .slider {
   position: absolute;
   top: -90%;
   left: -14%;
   transform: rotate(-90deg);
   opacity: 0;
-  transition: opacity .25s;
+  transition: opacity 0.25s;
 }
 
 /*********** Baseline, reset styles ***********/
@@ -417,7 +441,7 @@ input[type="range"]:focus {
 input[type="range"]::-webkit-slider-runnable-track {
   background-color: #ff0000;
   border-radius: 0.5rem;
-  height: .7rem;
+  height: 0.7rem;
 }
 
 /* slider thumb */
@@ -443,7 +467,7 @@ input[type="range"]:focus::-webkit-slider-thumb {
 input[type="range"]::-moz-range-track {
   background-color: #ff0000;
   border-radius: 0.5rem;
-  height: .7rem;
+  height: 0.7rem;
 }
 
 /* slider thumb */
@@ -459,4 +483,185 @@ input[type="range"]::-moz-range-thumb {
 input[type="range"]:focus::-moz-range-thumb {
   outline: 3px solid #ff0000;
   outline-offset: 0.125rem;
+}
+
+.poster-container {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background: black;
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.poster-container h1 {
+  font-size: 5vw;
+  margin-bottom: 0;
+  opacity: 1;
+}
+
+.poster-container::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.poster-text {
+  color: white;
+  position: relative;
+  padding-bottom: 15vh;
+  padding-left: 5rem;
+}
+
+.poster-text p {
+  max-width: 40vw;
+}
+
+.flex {
+  display: flex;
+}
+
+.poster-button {
+  color: white;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  border: 1px solid white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: background 0.5s, color 0.5s;
+}
+
+.poster-button:hover {
+  background: white;
+  color: black;
+}
+
+.poster-button svg {
+  margin-right: 0.5rem;
+}
+
+.subtitle-container {
+  display: none;
+  position: absolute;
+  right: 0;
+  bottom: 10vh;
+  overflow-y: scroll;
+  width: 50vw;
+  height: 50vh;
+  background: #232323;
+  flex-direction: column;
+}
+
+/* video::cue {
+  opacity: 1;
+  background-color: black;
+  font-size: 20px !important;
+  color: red;
+  line-height: 1.5;
+} */
+
+@media only screen and (max-width: 768px) {
+  .video-container .controls .title {
+    display: none;
+  }
+  .poster-text {
+    padding: 1rem;
+  }
+  .poster-text p {
+    max-width: 80vw;
+  }
+
+  .poster-buttons {
+    flex-direction: column;
+  }
+
+  .video-container .controls button {
+    min-width: 30px;
+    min-height: 30px;
+  }
+  .video-container .progress-controls .progress-bar {
+    width: 80vw;
+  }
+  .video-container .progress-controls .time-remaining {
+    width: auto;
+    font-size: 0.8rem;
+  }
+
+  .season-container,
+  .subtitle-container {
+    bottom: 4vh;
+    width: 100vw;
+    height: 30vh;
+  }
+  .playback-controls {
+    bottom: 4vh;
+    width: 85vw;
+  }
+  .season-select,
+  .subtitle-select,
+  .episode-header {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+  .season-select {
+  }
+  .season-detail {
+    max-width: 100vw;
+  }
+  .episode-name-btn {
+    font-size: 0.8rem;
+  }
+  .episode-cover {
+    width: 25rem;
+    margin-right: 1rem;
+  }
+  .episode-desc-container p {
+    font-size: 0.7rem;
+    max-width: 92vw;
+  }
+  .play-option {
+    width: 40px;
+    height: 40px;
+  }
+  .playback-controls p {
+    font-size: 1rem;
+  }
+  .playback-controls button {
+    font-size: 0.8rem;
+  }
+  .playback-icon {
+    width: 5vw !important;
+    height: 3rem !important;
+    margin-bottom: 0 !important;
+  }
+  .pb-line {
+    width: 90%;
+    left: 28%;
+    top: 13%;
+  }
+  .slider {
+    top: -147%;
+    left: -48%;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  .video-container .controls button {
+    min-width: 20px;
+    min-height: 20px;
+  }
 }
