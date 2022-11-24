@@ -62,7 +62,7 @@ const displayControls = () => {
     backButton.style.opacity = "0";
 
     removePlaybackControls();
-  }, 25000000);
+  }, 2000);
 };
 
 const playPause = () => {
