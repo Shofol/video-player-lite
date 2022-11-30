@@ -1,6 +1,7 @@
 let seasonsDetail = {};
 const seasonContainer = document.querySelector(".season-container");
 const subContainer = document.querySelector(".subtitle-container");
+const title = document.querySelector(".title");
 
 // Fetching season details
 fetch("http://api.streamio.cx/player.php?action=getseasons&id=601")
@@ -48,6 +49,10 @@ const mapSeasons = () => {
       showSeasonDetails(season);
     });
   });
+  title.innerHTML = ``;
+  title.innerHTML += `<span class="episode">Season ${seasonsDetail.seasons[0].season_number} </span> 
+  <span class="episode">Episode ${seasonsDetail.seasons[0].episodes[0].episode_number}: </span>
+  <span class="episode">${seasonsDetail.seasons[0].episodes[0].name}</span>`
 };
 
 const mapSubtitles = () => {
@@ -104,10 +109,10 @@ function showSeasonDetails(season) {
     el.classList.add("season-detail");
 
     el.innerHTML += `
-                <button onClick="showDesc(${index})" class="episode-name-btn">Episode ${index}: ${episode.name}</button>
+                <button onClick="showDesc(${index})" class="episode-name-btn">Episode ${episode.episode_number}: ${episode.name}</button>
                 <div class="episode-desc-container">
                     <div class="episode-cover" style="background-image:url(${episode.cover})">
-                    <button class="play-option"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="Hawkins-Icon Hawkins-Icon-Standard"><path d="M4 2.69127C4 1.93067 4.81547 1.44851 5.48192 1.81506L22.4069 11.1238C23.0977 11.5037 23.0977 12.4963 22.4069 12.8762L5.48192 22.1849C4.81546 22.5515 4 22.0693 4 21.3087V2.69127Z" fill="currentColor"></path></svg></div>
+                    <button class="play-option" onclick="onEpisodePlay(${JSON.stringify(season).split('"').join("&quot;")}, ${index})"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="Hawkins-Icon Hawkins-Icon-Standard"><path d="M4 2.69127C4 1.93067 4.81547 1.44851 5.48192 1.81506L22.4069 11.1238C23.0977 11.5037 23.0977 12.4963 22.4069 12.8762L5.48192 22.1849C4.81546 22.5515 4 22.0693 4 21.3087V2.69127Z" fill="currentColor"></path></svg></div>
                     </button>
                     <p>${episode.description}</p>
                 <div>
@@ -127,7 +132,7 @@ const showDesc = (index) => {
   }
   const description = document
     .getElementsByClassName("season-detail")
-    [index].getElementsByClassName("episode-desc-container")[0];
+  [index].getElementsByClassName("episode-desc-container")[0];
   description.classList.add("episode-desc-active");
 };
 
@@ -139,6 +144,13 @@ const onEpisodeHeaderClick = () => {
   seasonDetailContainer.style.display = "none";
   seasonDetailContainer.innerHTML = "";
 };
+
+const onEpisodePlay = (season, index) => {
+  title.innerHTML = ``;
+  title.innerHTML += `<span class="episode">Season ${season.season_number} </span> 
+     <span class="episode">Episode ${season.episodes[index].episode_number}: </span>
+     <span class="episode">${season.episodes[index].name}</span>`
+}
 
 const onEpisodeButtonClick = () => {
   seasonContainer.style.display = "flex";
