@@ -36,6 +36,9 @@ const minimizeButton = fullScreenButton.querySelector(".minimize");
 const progressBar = document.querySelector(
   ".video-container .progress-controls .progress-bar"
 );
+
+const playhead = document.querySelector('.playhead')
+
 const watchedBar = document.querySelector(
   ".video-container .progress-controls .progress-bar .watched-bar"
 );
@@ -168,16 +171,21 @@ video.addEventListener("timeupdate", () => {
   // THANK YOU: BEGANOVICH
   const time = new Date(null);
   time.setSeconds(totalSecondsRemaining);
-  let hours = null;
+  // let hours = null;
+
+  let hhmmssFormat = time.toISOString();
+  let updatedFormat = hhmmssFormat;
 
   if (totalSecondsRemaining >= 3600) {
-    hours = time.getHours().toString().padStart("2", "0");
+    updatedFormat = hhmmssFormat.substr(11, 8)
+  } else {
+    updatedFormat = hhmmssFormat.substr(14, 5)
   }
 
   let minutes = time.getMinutes().toString().padStart("2", "0");
   let seconds = time.getSeconds().toString().padStart("2", "0");
 
-  timeLeft.textContent = `${hours ? hours : "00"}:${minutes}:${seconds}`;
+  timeLeft.textContent = `${updatedFormat}`;
 });
 
 progressBar.addEventListener("click", (event) => {
@@ -187,6 +195,24 @@ progressBar.addEventListener("click", (event) => {
     progressBar.offsetWidth;
   video.currentTime = pos * video.duration;
 });
+
+let changing = false;
+
+playhead.addEventListener('mousemove', (event) => {
+  changing = true;
+});
+
+window.addEventListener('mouseup', (event) => {
+  if (changing) {
+    const pos =
+      (event.pageX -
+        (progressBar.offsetLeft + progressBar.offsetParent.offsetLeft)) /
+      progressBar.offsetWidth;
+    video.currentTime = pos * video.duration;
+  }
+  changing = false;
+});
+
 
 playPauseButton.addEventListener("click", playPause);
 
